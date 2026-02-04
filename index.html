@@ -6,28 +6,31 @@
     <title>LEGACY | Calculadora de Ganancias</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'legacy': {
-                            'dark': '#0a0a0f',
-                            'darker': '#050508',
-                            'card': '#12121a',
-                            'border': '#1f1f2e',
-                            'gold': '#c9a962',
-                            'gold-light': '#dfc07f',
-                            'gold-dark': '#a68a4a',
-                            'accent': '#e8a849',
-                            'text': '#f5f5f7',
-                            'text-muted': '#8b8b9e',
+                        'luxury': {
+                            'black': '#000000',
+                            'dark': '#0a0a0a',
+                            'darker': '#050505',
+                            'card': '#0f0f0f',
+                            'border': '#1a1a1a',
+                            'gold': '#d4af37',
+                            'gold-light': '#f4d03f',
+                            'gold-dark': '#b8960c',
+                            'gold-pale': '#e8d5a3',
+                            'champagne': '#f7e7ce',
+                            'text': '#ffffff',
+                            'text-muted': '#6b6b6b',
+                            'text-soft': '#9a9a9a',
                         }
                     },
                     fontFamily: {
-                        'display': ['Playfair Display', 'serif'],
+                        'display': ['Cormorant Garamond', 'serif'],
                         'body': ['Montserrat', 'sans-serif'],
                     }
                 }
@@ -40,100 +43,387 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
+            background: #000000;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .gold-gradient {
-            background: linear-gradient(135deg, #c9a962 0%, #e8a849 50%, #c9a962 100%);
+        /* Fondo con patrón sutil */
+        .bg-pattern {
+            background-image: 
+                radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(212, 175, 55, 0.02) 0%, transparent 40%),
+                radial-gradient(ellipse at 0% 100%, rgba(212, 175, 55, 0.02) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Líneas decorativas animadas */
+        .decorative-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .decorative-lines::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 120%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transform: rotate(-5deg);
+            animation: shimmerLine 8s ease-in-out infinite;
+        }
+
+        .decorative-lines::after {
+            content: '';
+            position: absolute;
+            bottom: 30%;
+            left: -10%;
+            width: 120%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
+            transform: rotate(3deg);
+            animation: shimmerLine 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes shimmerLine {
+            0%, 100% { opacity: 0.3; transform: translateX(-5%) rotate(-5deg); }
+            50% { opacity: 0.7; transform: translateX(5%) rotate(-5deg); }
+        }
+
+        /* Gradiente dorado premium */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f4d03f 0%, #d4af37 25%, #b8960c 50%, #d4af37 75%, #f4d03f 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: goldShimmer 4s ease-in-out infinite;
         }
 
-        .card-glass {
-            background: rgba(18, 18, 26, 0.8);
+        @keyframes goldShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Tarjetas con efecto glass premium */
+        .card-premium {
+            background: linear-gradient(145deg, rgba(15, 15, 15, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 
+                0 0 0 1px rgba(212, 175, 55, 0.05),
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.02);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .input-luxury {
-            background: rgba(10, 10, 15, 0.6);
-            border: 1px solid rgba(201, 169, 98, 0.2);
-            transition: all 0.3s ease;
+        .card-premium:hover {
+            border-color: rgba(212, 175, 55, 0.25);
+            box-shadow: 
+                0 0 0 1px rgba(212, 175, 55, 0.1),
+                0 25px 50px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(212, 175, 55, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            transform: translateY(-2px);
         }
 
-        .input-luxury:focus {
-            border-color: #c9a962;
-            box-shadow: 0 0 20px rgba(201, 169, 98, 0.15);
+        /* Tarjeta destacada con glow */
+        .card-highlight {
+            background: linear-gradient(145deg, rgba(20, 18, 10, 0.95) 0%, rgba(15, 13, 8, 0.98) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 
+                0 0 0 1px rgba(212, 175, 55, 0.1),
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(212, 175, 55, 0.08),
+                inset 0 0 60px rgba(212, 175, 55, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.03), transparent 30%);
+            animation: rotateGlow 15s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Input premium */
+        .input-premium {
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.6) 0%, rgba(5, 5, 5, 0.8) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .input-premium:focus {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 
+                0 0 0 3px rgba(212, 175, 55, 0.1),
+                0 0 30px rgba(212, 175, 55, 0.1),
+                inset 0 0 20px rgba(212, 175, 55, 0.02);
             outline: none;
         }
 
-        .btn-gold {
-            background: linear-gradient(135deg, #c9a962 0%, #a68a4a 100%);
+        .input-premium::placeholder {
+            color: #4a4a4a;
+        }
+
+        /* Botón dorado premium */
+        .btn-luxury {
+            background: linear-gradient(135deg, #d4af37 0%, #b8960c 50%, #d4af37 100%);
+            background-size: 200% auto;
+            color: #000000;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 4px 15px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-luxury:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 25px rgba(212, 175, 55, 0.4),
+                0 0 40px rgba(212, 175, 55, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-luxury::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .btn-luxury:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        /* Animaciones de entrada */
+        .animate-fade-up {
+            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+
+        /* Dropdown premium */
+        .dropdown-premium {
+            background: linear-gradient(180deg, rgba(15, 15, 15, 0.98) 0%, rgba(10, 10, 10, 0.99) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(212, 175, 55, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        }
+
+        .dropdown-item {
             transition: all 0.3s ease;
+            border-left: 2px solid transparent;
         }
 
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #dfc07f 0%, #c9a962 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+        .dropdown-item:hover {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, transparent 100%);
+            border-left-color: #d4af37;
         }
 
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .product-item:hover {
-            background: rgba(201, 169, 98, 0.05);
-        }
-
+        /* Scrollbar elegante */
         .scrollbar-luxury::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
 
         .scrollbar-luxury::-webkit-scrollbar-track {
-            background: rgba(10, 10, 15, 0.5);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .scrollbar-luxury::-webkit-scrollbar-thumb {
-            background: rgba(201, 169, 98, 0.3);
-            border-radius: 3px;
+            background: linear-gradient(180deg, #d4af37 0%, #b8960c 100%);
+            border-radius: 2px;
         }
 
-        .glow-gold {
-            box-shadow: 0 0 40px rgba(201, 169, 98, 0.1);
+        /* Divisor dorado con animación */
+        .divider-luxury {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+            position: relative;
         }
 
+        .divider-luxury::after {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #d4af37;
+            font-size: 8px;
+            background: #0a0a0a;
+            padding: 0 10px;
+        }
+
+        /* Números con estilo */
         .number-display {
             font-variant-numeric: tabular-nums;
+            letter-spacing: 0.02em;
         }
 
-        .divider-gold {
+        /* Efecto de brillo en hover para valores */
+        .value-highlight {
+            position: relative;
+            display: inline-block;
+        }
+
+        .value-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
+        .value-highlight:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Escala activa con glow */
+        .scale-active {
+            color: #d4af37 !important;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            position: relative;
+        }
+
+        .scale-active::before {
+            content: '▸';
+            position: absolute;
+            left: -15px;
+            color: #d4af37;
+            animation: pulseArrow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseArrow {
+            0%, 100% { opacity: 0.5; transform: translateX(0); }
+            50% { opacity: 1; transform: translateX(3px); }
+        }
+
+        /* Contador animado */
+        .counter-animate {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Label elegante */
+        .label-elegant {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #6b6b6b;
+            font-weight: 400;
+        }
+
+        /* Icono con glow */
+        .icon-glow {
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            transition: filter 0.3s ease;
+        }
+
+        .icon-glow:hover {
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+        }
+
+        /* Producto card hover effect */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            background: linear-gradient(145deg, rgba(20, 18, 12, 0.9) 0%, rgba(15, 13, 8, 0.95) 100%);
+        }
+
+        /* Select styling */
         select option {
-            background: #12121a;
-            color: #f5f5f7;
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        /* Pulse effect for total */
+        .pulse-gold {
+            animation: pulseGold 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+        }
+
+        /* Loading shimmer */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
     </style>
 </head>
-<body class="font-body text-legacy-text antialiased">
-    <div id="root"></div>
+<body class="font-body text-luxury-text antialiased bg-pattern">
+    <!-- Líneas decorativas de fondo -->
+    <div class="decorative-lines"></div>
+    
+    <div id="root" class="relative z-10"></div>
 
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        const { useState, useEffect, useMemo } = React;
+        const { useState, useEffect, useMemo, useRef } = React;
 
         // Datos de productos
         const productsData = [
@@ -235,6 +525,17 @@
         const ProductLine = ({ index, product, quantity, onProductChange, onQuantityChange, onRemove, showRemove }) => {
             const [searchTerm, setSearchTerm] = useState('');
             const [isOpen, setIsOpen] = useState(false);
+            const dropdownRef = useRef(null);
+
+            useEffect(() => {
+                const handleClickOutside = (event) => {
+                    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                        setIsOpen(false);
+                    }
+                };
+                document.addEventListener('mousedown', handleClickOutside);
+                return () => document.removeEventListener('mousedown', handleClickOutside);
+            }, []);
 
             const filteredProducts = useMemo(() => {
                 if (!searchTerm) return productsData;
@@ -256,23 +557,32 @@
             }, [filteredProducts]);
 
             return (
-                <div className="card-glass rounded-xl p-5 mb-4 animate-fade-in overflow-visible relative" style={{zIndex: 100 - index}}>
-                    <div className="flex items-center justify-between mb-4">
-                        <span className="text-legacy-gold font-display text-lg">Producto {index + 1}</span>
+                <div 
+                    className="card-premium rounded-2xl p-6 mb-5 animate-fade-up product-card overflow-visible relative"
+                    style={{animationDelay: `${index * 0.1}s`, zIndex: 100 - index}}
+                >
+                    {/* Header del producto */}
+                    <div className="flex items-center justify-between mb-5">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold-dark flex items-center justify-center text-black font-semibold text-sm">
+                                {index + 1}
+                            </div>
+                            <span className="font-display text-xl text-luxury-gold-pale">Producto</span>
+                        </div>
                         {showRemove && (
                             <button 
                                 onClick={onRemove}
-                                className="text-legacy-text-muted hover:text-red-400 transition-colors text-sm"
+                                className="text-luxury-text-muted hover:text-red-400 transition-all duration-300 text-xs uppercase tracking-widest hover:tracking-wider"
                             >
-                                ✕ Eliminar
+                                Eliminar
                             </button>
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
                         {/* Selector de producto */}
-                        <div className="lg:col-span-6 relative z-[100]">
-                            <label className="block text-legacy-text-muted text-xs uppercase tracking-wider mb-2">
+                        <div className="lg:col-span-6 relative z-[100]" ref={dropdownRef}>
+                            <label className="label-elegant block mb-2">
                                 Seleccionar Producto
                             </label>
                             <div className="relative">
@@ -286,13 +596,19 @@
                                         setIsOpen(true);
                                     }}
                                     onFocus={() => setIsOpen(true)}
-                                    className="w-full input-luxury rounded-lg px-4 py-3 text-legacy-text placeholder-legacy-text-muted"
+                                    className="w-full input-premium rounded-xl px-5 py-4 text-luxury-text text-sm"
                                 />
+                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-luxury-gold opacity-50">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </div>
                                 {isOpen && !product && (
-                                    <div className="absolute z-[9999] w-full mt-2 max-h-64 overflow-y-auto scrollbar-luxury card-glass rounded-lg border border-legacy-border shadow-xl">
+                                    <div className="absolute z-[9999] w-full mt-2 max-h-72 overflow-y-auto scrollbar-luxury dropdown-premium rounded-xl">
                                         {Object.entries(groupedProducts).map(([categoria, products]) => (
                                             <div key={categoria}>
-                                                <div className="px-4 py-2 text-legacy-gold text-xs uppercase tracking-wider bg-legacy-darker sticky top-0">
+                                                <div className="px-5 py-3 text-luxury-gold text-[10px] uppercase tracking-[0.2em] bg-black/50 sticky top-0 backdrop-blur-sm border-b border-luxury-gold/10">
                                                     {categoria}
                                                 </div>
                                                 {products.map(p => (
@@ -303,11 +619,12 @@
                                                             setSearchTerm('');
                                                             setIsOpen(false);
                                                         }}
-                                                        className="px-4 py-3 cursor-pointer product-item transition-colors border-b border-legacy-border/30 last:border-0"
+                                                        className="px-5 py-4 cursor-pointer dropdown-item border-b border-white/5 last:border-0"
                                                     >
-                                                        <div className="text-legacy-text text-sm">{p.nombre}</div>
-                                                        <div className="text-legacy-text-muted text-xs mt-1">
-                                                            SKU: {p.sku} • {p.vv} puntos
+                                                        <div className="text-luxury-text text-sm font-light">{p.nombre}</div>
+                                                        <div className="text-luxury-text-muted text-xs mt-1 flex items-center gap-3">
+                                                            <span>SKU: {p.sku}</span>
+                                                            <span className="text-luxury-gold">{p.vv} VV</span>
                                                         </div>
                                                     </div>
                                                 ))}
@@ -320,7 +637,7 @@
 
                         {/* Cantidad */}
                         <div className="lg:col-span-2">
-                            <label className="block text-legacy-text-muted text-xs uppercase tracking-wider mb-2">
+                            <label className="label-elegant block mb-2">
                                 Cantidad
                             </label>
                             <input
@@ -328,7 +645,7 @@
                                 min="1"
                                 value={quantity}
                                 onChange={(e) => onQuantityChange(Math.max(1, parseInt(e.target.value) || 1))}
-                                className="w-full input-luxury rounded-lg px-4 py-3 text-legacy-text text-center number-display"
+                                className="w-full input-premium rounded-xl px-5 py-4 text-luxury-text text-center number-display text-lg font-light"
                             />
                         </div>
 
@@ -336,18 +653,18 @@
                         {product && (
                             <>
                                 <div className="lg:col-span-2">
-                                    <label className="block text-legacy-text-muted text-xs uppercase tracking-wider mb-2">
+                                    <label className="label-elegant block mb-2">
                                         Precio Público
                                     </label>
-                                    <div className="input-luxury rounded-lg px-4 py-3 text-legacy-gold-light number-display text-sm">
+                                    <div className="input-premium rounded-xl px-4 py-4 text-luxury-gold number-display text-sm font-light">
                                         {formatCurrency(product.precioPublicoSinImpuesto)}
                                     </div>
                                 </div>
                                 <div className="lg:col-span-2">
-                                    <label className="block text-legacy-text-muted text-xs uppercase tracking-wider mb-2">
+                                    <label className="label-elegant block mb-2">
                                         Precio Miembro
                                     </label>
-                                    <div className="input-luxury rounded-lg px-4 py-3 text-legacy-text number-display text-sm">
+                                    <div className="input-premium rounded-xl px-4 py-4 text-luxury-text-soft number-display text-sm font-light">
                                         {formatCurrency(product.precioMiembroSinImpuesto)}
                                     </div>
                                 </div>
@@ -357,12 +674,17 @@
 
                     {/* Puntos */}
                     {product && (
-                        <div className="mt-4 flex items-center gap-2">
-                            <span className="text-legacy-text-muted text-sm">Puntos por producto:</span>
-                            <span className="text-legacy-gold font-semibold">{product.vv} VV</span>
-                            <span className="text-legacy-text-muted mx-2">•</span>
-                            <span className="text-legacy-text-muted text-sm">Total puntos:</span>
-                            <span className="text-legacy-gold font-semibold">{formatNumber(product.vv * quantity)} VV</span>
+                        <div className="mt-5 pt-5 border-t border-white/5 flex items-center gap-6">
+                            <div className="flex items-center gap-2">
+                                <span className="text-luxury-text-muted text-xs uppercase tracking-wider">Puntos/unidad</span>
+                                <span className="text-luxury-gold font-display text-lg">{product.vv}</span>
+                            </div>
+                            <div className="w-px h-4 bg-luxury-gold/20"></div>
+                            <div className="flex items-center gap-2">
+                                <span className="text-luxury-text-muted text-xs uppercase tracking-wider">Total puntos</span>
+                                <span className="text-luxury-gold font-display text-lg">{formatNumber(product.vv * quantity)}</span>
+                                <span className="text-luxury-gold-dark text-xs">VV</span>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -370,22 +692,33 @@
         };
 
         // Componente de tarjeta de resultado
-        const ResultCard = ({ title, value, subtitle, highlight = false, icon }) => (
-            <div className={`card-glass rounded-xl p-5 ${highlight ? 'glow-gold border-legacy-gold/30' : ''}`}>
-                <div className="flex items-start justify-between">
-                    <div>
-                        <p className="text-legacy-text-muted text-xs uppercase tracking-wider mb-1">{title}</p>
-                        <p className={`font-display text-2xl lg:text-3xl number-display ${highlight ? 'gold-gradient' : 'text-legacy-text'}`}>
-                            {value}
-                        </p>
-                        {subtitle && (
-                            <p className="text-legacy-text-muted text-sm mt-1">{subtitle}</p>
+        const ResultCard = ({ title, value, subtitle, highlight = false, icon, delay = 0 }) => (
+            <div 
+                className={`${highlight ? 'card-highlight pulse-gold' : 'card-premium'} rounded-2xl p-5 animate-fade-up`}
+                style={{animationDelay: `${delay}s`}}
+            >
+                <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-3">
+                        <p className="label-elegant">{title}</p>
+                        {icon && (
+                            <span className="text-xl icon-glow">{icon}</span>
                         )}
                     </div>
-                    {icon && (
-                        <span className="text-2xl">{icon}</span>
+                    <p className={`font-display text-3xl number-display value-highlight ${highlight ? 'gold-gradient-text' : 'text-luxury-text'}`}>
+                        {value}
+                    </p>
+                    {subtitle && (
+                        <p className="text-luxury-text-muted text-xs mt-2 font-light">{subtitle}</p>
                     )}
                 </div>
+            </div>
+        );
+
+        // Componente de escala
+        const ScaleItem = ({ range, percentage, isActive }) => (
+            <div className={`flex justify-between py-2 transition-all duration-500 ${isActive ? 'scale-active pl-4' : 'text-luxury-text-muted'}`}>
+                <span className="text-sm font-light">{range}</span>
+                <span className="text-sm font-medium">{percentage}%</span>
             </div>
         );
 
@@ -424,7 +757,6 @@
                 const porcentajeBono2 = getBono2Percentage(totalPuntos);
                 const porcentajeBono3 = getBono3Percentage(totalPuntos);
 
-                // Calcular ganancia por venta (Bono 2) basado en precio miembro
                 let baseGananciaVenta = 0;
                 productLines.forEach(({ product, quantity }) => {
                     if (product) {
@@ -432,10 +764,7 @@
                     }
                 });
                 const gananciaVenta = baseGananciaVenta * (porcentajeBono2 / 100);
-
-                // Calcular ganancia por referir (Bono 3) basado en precio miembro
                 const gananciaReferir = baseGananciaVenta * (porcentajeBono3 / 100);
-
                 const totalGanancias = totalGananciaMinorista + gananciaVenta + gananciaReferir;
 
                 return {
@@ -452,29 +781,40 @@
             const hasProducts = productLines.some(pl => pl.product !== null);
 
             return (
-                <div className="min-h-screen py-8 px-4">
-                    <div className="max-w-6xl mx-auto">
+                <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto">
                         {/* Header */}
-                        <header className="text-center mb-12">
-                            <h1 className="font-display text-5xl lg:text-6xl font-bold mb-3">
-                                <span className="gold-gradient">LEGACY</span>
+                        <header className="text-center mb-16 animate-fade-up">
+                            <div className="mb-6">
+                                <div className="inline-block">
+                                    <div className="flex items-center justify-center gap-4 mb-4">
+                                        <div className="w-16 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                                        <span className="text-luxury-gold text-[10px] tracking-[0.4em] uppercase">Calculadora Empresarial</span>
+                                        <div className="w-16 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl font-light tracking-wide mb-4">
+                                <span className="gold-gradient-text">LEGACY</span>
                             </h1>
-                            <p className="text-legacy-text-muted text-lg font-light tracking-wide">
-                                Calculadora de Ganancias
+                            <p className="text-luxury-text-muted text-sm tracking-[0.3em] uppercase font-light">
+                                Proyecta tus ganancias
                             </p>
-                            <div className="divider-gold w-32 mx-auto mt-6"></div>
                         </header>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
                             {/* Panel de productos */}
-                            <div className="lg:col-span-2">
-                                <div className="flex items-center justify-between mb-6">
-                                    <h2 className="font-display text-2xl text-legacy-text">Mis Productos</h2>
+                            <div className="xl:col-span-2">
+                                <div className="flex items-center justify-between mb-8">
+                                    <div>
+                                        <h2 className="font-display text-2xl text-luxury-text font-light">Mis Productos</h2>
+                                        <p className="text-luxury-text-muted text-xs mt-1">Agrega los productos que deseas calcular</p>
+                                    </div>
                                     <button 
                                         onClick={addProductLine}
-                                        className="btn-gold text-legacy-darker px-5 py-2 rounded-lg font-medium text-sm"
+                                        className="btn-luxury px-6 py-3 rounded-xl text-xs"
                                     >
-                                        + Agregar Producto
+                                        + Agregar
                                     </button>
                                 </div>
 
@@ -492,111 +832,113 @@
                                 ))}
 
                                 {/* Escalas de bonos */}
-                                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 relative z-[1]">
-                                    <div className="card-glass rounded-xl p-5">
-                                        <h3 className="text-legacy-gold font-display text-lg mb-3">Escala Ganancia por Venta</h3>
-                                        <div className="space-y-2 text-sm">
-                                            <div className={`flex justify-between ${calculations.porcentajeBono2 === 4 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>0 - 499 puntos</span><span>4%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono2 === 8 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>500 - 2,500 puntos</span><span>8%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono2 === 12 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>2,501 - 9,999 puntos</span><span>12%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono2 === 20 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>10,000+ puntos</span><span>20%</span>
-                                            </div>
+                                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-[1]">
+                                    <div className="card-premium rounded-2xl p-6 animate-fade-up" style={{animationDelay: '0.3s'}}>
+                                        <div className="flex items-center gap-3 mb-5">
+                                            <div className="w-2 h-2 rounded-full bg-luxury-gold"></div>
+                                            <h3 className="text-luxury-gold font-display text-lg font-light">Escala Ganancia por Venta</h3>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <ScaleItem range="0 — 499 puntos" percentage={4} isActive={calculations.porcentajeBono2 === 4} />
+                                            <ScaleItem range="500 — 2,500 puntos" percentage={8} isActive={calculations.porcentajeBono2 === 8} />
+                                            <ScaleItem range="2,501 — 9,999 puntos" percentage={12} isActive={calculations.porcentajeBono2 === 12} />
+                                            <ScaleItem range="10,000+ puntos" percentage={20} isActive={calculations.porcentajeBono2 === 20} />
                                         </div>
                                     </div>
-                                    <div className="card-glass rounded-xl p-5">
-                                        <h3 className="text-legacy-gold font-display text-lg mb-3">Escala Ganancia por Referir</h3>
-                                        <div className="space-y-2 text-sm">
-                                            <div className={`flex justify-between ${calculations.porcentajeBono3 === 0 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>0 - 249 puntos</span><span>0%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono3 === 4 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>250 - 499 puntos</span><span>4%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono3 === 12 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>500 - 2,499 puntos</span><span>12%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono3 === 16 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>2,500 - 9,999 puntos</span><span>16%</span>
-                                            </div>
-                                            <div className={`flex justify-between ${calculations.porcentajeBono3 === 24 ? 'text-legacy-gold' : 'text-legacy-text-muted'}`}>
-                                                <span>10,000+ puntos</span><span>24%</span>
-                                            </div>
+                                    <div className="card-premium rounded-2xl p-6 animate-fade-up" style={{animationDelay: '0.4s'}}>
+                                        <div className="flex items-center gap-3 mb-5">
+                                            <div className="w-2 h-2 rounded-full bg-luxury-gold"></div>
+                                            <h3 className="text-luxury-gold font-display text-lg font-light">Escala Ganancia por Referir</h3>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <ScaleItem range="0 — 249 puntos" percentage={0} isActive={calculations.porcentajeBono3 === 0} />
+                                            <ScaleItem range="250 — 499 puntos" percentage={4} isActive={calculations.porcentajeBono3 === 4} />
+                                            <ScaleItem range="500 — 2,499 puntos" percentage={12} isActive={calculations.porcentajeBono3 === 12} />
+                                            <ScaleItem range="2,500 — 9,999 puntos" percentage={16} isActive={calculations.porcentajeBono3 === 16} />
+                                            <ScaleItem range="10,000+ puntos" percentage={24} isActive={calculations.porcentajeBono3 === 24} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Panel de resultados */}
-                            <div className="lg:col-span-1">
-                                <h2 className="font-display text-2xl text-legacy-text mb-6">Mis Ganancias</h2>
-                                
-                                <div className="space-y-4">
-                                    {/* Puntos totales */}
-                                    <ResultCard
-                                        title="Puntos Totales (VV)"
-                                        value={formatNumber(calculations.totalPuntos)}
-                                        icon="⭐"
-                                    />
-
-                                    <div className="divider-gold my-6"></div>
-
-                                    {/* Ganancia Minorista (Bono 1) */}
-                                    <ResultCard
-                                        title="Ganancia Minorista"
-                                        value={formatCurrency(calculations.totalGananciaMinorista)}
-                                        subtitle="Diferencia precio público vs miembro"
-                                        icon="💎"
-                                    />
-
-                                    {/* Ganancia por Venta (Bono 2) */}
-                                    <ResultCard
-                                        title={`Ganancia por Venta (${calculations.porcentajeBono2}%)`}
-                                        value={formatCurrency(calculations.gananciaVenta)}
-                                        subtitle="Basado en tu nivel de puntos"
-                                        icon="📈"
-                                    />
-
-                                    {/* Ganancia por Referir (Bono 3) */}
-                                    <ResultCard
-                                        title={`Ganancia por Referir (${calculations.porcentajeBono3}%)`}
-                                        value={formatCurrency(calculations.gananciaReferir)}
-                                        subtitle="Bonificación por compartir"
-                                        icon="🤝"
-                                    />
-
-                                    <div className="divider-gold my-6"></div>
-
-                                    {/* Total */}
-                                    <ResultCard
-                                        title="Total Ganancias Potenciales"
-                                        value={formatCurrency(calculations.totalGanancias)}
-                                        highlight={true}
-                                        icon="🏆"
-                                    />
-                                </div>
-
-                                {!hasProducts && (
-                                    <div className="mt-6 text-center text-legacy-text-muted text-sm">
-                                        <p>Selecciona productos para ver tus ganancias potenciales</p>
+                            <div className="xl:col-span-1">
+                                <div className="sticky top-8">
+                                    <div className="mb-8">
+                                        <h2 className="font-display text-2xl text-luxury-text font-light">Mis Ganancias</h2>
+                                        <p className="text-luxury-text-muted text-xs mt-1">Resumen de tu proyección</p>
                                     </div>
-                                )}
+                                    
+                                    <div className="space-y-4">
+                                        {/* Puntos totales */}
+                                        <ResultCard
+                                            title="Puntos Totales"
+                                            value={formatNumber(calculations.totalPuntos) + " VV"}
+                                            icon="✦"
+                                            delay={0.1}
+                                        />
+
+                                        <div className="divider-luxury my-6"></div>
+
+                                        {/* Ganancia Minorista */}
+                                        <ResultCard
+                                            title="Ganancia Minorista"
+                                            value={formatCurrency(calculations.totalGananciaMinorista)}
+                                            subtitle="Diferencia precio público vs miembro"
+                                            icon="◈"
+                                            delay={0.2}
+                                        />
+
+                                        {/* Ganancia por Venta */}
+                                        <ResultCard
+                                            title={`Ganancia por Venta · ${calculations.porcentajeBono2}%`}
+                                            value={formatCurrency(calculations.gananciaVenta)}
+                                            subtitle="Según tu nivel de puntos"
+                                            icon="◇"
+                                            delay={0.3}
+                                        />
+
+                                        {/* Ganancia por Referir */}
+                                        <ResultCard
+                                            title={`Ganancia por Referir · ${calculations.porcentajeBono3}%`}
+                                            value={formatCurrency(calculations.gananciaReferir)}
+                                            subtitle="Bonificación por compartir"
+                                            icon="◆"
+                                            delay={0.4}
+                                        />
+
+                                        <div className="divider-luxury my-6"></div>
+
+                                        {/* Total */}
+                                        <ResultCard
+                                            title="Total Ganancias Potenciales"
+                                            value={formatCurrency(calculations.totalGanancias)}
+                                            highlight={true}
+                                            icon="★"
+                                            delay={0.5}
+                                        />
+                                    </div>
+
+                                    {!hasProducts && (
+                                        <div className="mt-8 text-center">
+                                            <div className="inline-block p-6 rounded-2xl border border-dashed border-luxury-gold/20">
+                                                <p className="text-luxury-text-muted text-sm font-light">
+                                                    Selecciona productos para<br/>ver tus ganancias potenciales
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
                         {/* Footer */}
-                        <footer className="mt-16 text-center">
-                            <div className="divider-gold w-48 mx-auto mb-6"></div>
-                            <p className="text-legacy-text-muted text-sm">
-                                Lista de precios Colombia • Abril 2025
+                        <footer className="mt-20 text-center animate-fade-up" style={{animationDelay: '0.6s'}}>
+                            <div className="divider-luxury w-64 mx-auto mb-8"></div>
+                            <p className="text-luxury-text-muted text-xs tracking-[0.2em] uppercase">
+                                Lista de precios Colombia · Abril 2025
                             </p>
-                            <p className="text-legacy-text-muted text-xs mt-2 opacity-60">
+                            <p className="text-luxury-text-muted/50 text-[10px] mt-3 tracking-wider">
                                 Los cálculos son estimados y pueden variar según condiciones del programa
                             </p>
                         </footer>
