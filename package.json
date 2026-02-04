@@ -1,0 +1,12 @@
+{
+  "name": "legacy-calculator",
+  "version": "1.0.0",
+  "description": "Calculadora de ganancias para red de mercadeo Nu Skin",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": ["nuskin", "calculator", "mlm", "colombia"],
+  "author": "LEGACY",
+  "license": "MIT"
+}
