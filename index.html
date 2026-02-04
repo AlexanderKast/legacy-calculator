@@ -256,7 +256,7 @@
             }, [filteredProducts]);
 
             return (
-                <div className="card-glass rounded-xl p-5 mb-4 animate-fade-in">
+                <div className="card-glass rounded-xl p-5 mb-4 animate-fade-in overflow-visible relative" style={{zIndex: 100 - index}}>
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-legacy-gold font-display text-lg">Producto {index + 1}</span>
                         {showRemove && (
@@ -271,7 +271,7 @@
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                         {/* Selector de producto */}
-                        <div className="lg:col-span-6 relative">
+                        <div className="lg:col-span-6 relative z-[100]">
                             <label className="block text-legacy-text-muted text-xs uppercase tracking-wider mb-2">
                                 Seleccionar Producto
                             </label>
@@ -289,7 +289,7 @@
                                     className="w-full input-luxury rounded-lg px-4 py-3 text-legacy-text placeholder-legacy-text-muted"
                                 />
                                 {isOpen && !product && (
-                                    <div className="absolute z-50 w-full mt-2 max-h-64 overflow-y-auto scrollbar-luxury card-glass rounded-lg border border-legacy-border shadow-xl">
+                                    <div className="absolute z-[9999] w-full mt-2 max-h-64 overflow-y-auto scrollbar-luxury card-glass rounded-lg border border-legacy-border shadow-xl">
                                         {Object.entries(groupedProducts).map(([categoria, products]) => (
                                             <div key={categoria}>
                                                 <div className="px-4 py-2 text-legacy-gold text-xs uppercase tracking-wider bg-legacy-darker sticky top-0">
@@ -492,7 +492,7 @@
                                 ))}
 
                                 {/* Escalas de bonos */}
-                                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 relative z-[1]">
                                     <div className="card-glass rounded-xl p-5">
                                         <h3 className="text-legacy-gold font-display text-lg mb-3">Escala Ganancia por Venta</h3>
                                         <div className="space-y-2 text-sm">
