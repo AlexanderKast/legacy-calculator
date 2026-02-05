@@ -534,7 +534,7 @@
         // Calcular porcentaje de Bono 2 (Ganancia por Venta)
         const getBono2Percentage = (puntos) => {
             if (puntos >= 10000) return 20;
-            if (puntos >= 2501) return 12;
+            if (puntos >= 2500) return 12;
             if (puntos >= 500) return 8;
             return 4;
         };
@@ -868,7 +868,7 @@
                                         <div className="space-y-1">
                                             <ScaleItem range="0 — 499 puntos" percentage={4} isActive={calculations.porcentajeBono2 === 4} />
                                             <ScaleItem range="500 — 2,499 puntos" percentage={8} isActive={calculations.porcentajeBono2 === 8} />
-                                            <ScaleItem range="2,501 — 9,999 puntos" percentage={12} isActive={calculations.porcentajeBono2 === 12} />
+                                            <ScaleItem range="2,500 — 9,999 puntos" percentage={12} isActive={calculations.porcentajeBono2 === 12} />
                                             <ScaleItem range="10,000+ puntos" percentage={20} isActive={calculations.porcentajeBono2 === 20} />
                                         </div>
                                     </div>
