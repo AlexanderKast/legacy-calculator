@@ -938,16 +938,39 @@
 
                                         {/* GRAN TOTAL */}
                                         <div 
-                                            className="card-highlight pulse-gold rounded-3xl p-8 animate-fade-up"
-                                            style={{animationDelay: '0.5s'}}
+                                            className="rounded-3xl p-8 animate-fade-up relative overflow-hidden"
+                                            style={{
+                                                animationDelay: '0.5s',
+                                                background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
+                                                border: '2px solid rgba(212, 175, 55, 0.5)',
+                                                boxShadow: '0 0 60px rgba(212, 175, 55, 0.15), 0 0 100px rgba(212, 175, 55, 0.1), 0 30px 60px rgba(0,0,0,0.5)'
+                                            }}
                                         >
+                                            {/* Efecto de brillo giratorio */}
+                                            <div 
+                                                className="absolute inset-0 opacity-30"
+                                                style={{
+                                                    background: 'conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent 30%)',
+                                                    animation: 'rotateGlow 10s linear infinite'
+                                                }}
+                                            ></div>
+                                            
                                             <div className="relative z-10 text-center">
-                                                <p className="label-elegant mb-4">Total Ganancias Potenciales</p>
-                                                <p className="font-display text-5xl sm:text-6xl number-display gold-gradient-text mb-2">
+                                                <div className="flex items-center justify-center gap-3 mb-4">
+                                                    <div className="w-8 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                                                    <p className="text-luxury-gold text-[11px] tracking-[0.3em] uppercase font-medium">Total Ganancias</p>
+                                                    <div className="w-8 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                                                </div>
+                                                <p className="font-display text-5xl sm:text-6xl lg:text-7xl number-display gold-gradient-text py-2">
                                                     {formatCurrency(calculations.totalGanancias)}
                                                 </p>
-                                                <div className="flex items-center justify-center gap-2 mt-4">
+                                                <p className="text-luxury-text-muted text-xs mt-3 tracking-wider">
+                                                    Suma de todas tus ganancias
+                                                </p>
+                                                <div className="flex items-center justify-center gap-2 mt-5">
+                                                    <span className="text-luxury-gold text-xl">✦</span>
                                                     <span className="text-luxury-gold text-2xl">★</span>
+                                                    <span className="text-luxury-gold text-xl">✦</span>
                                                 </div>
                                             </div>
                                         </div>
