@@ -891,90 +891,86 @@
                                 <p className="text-luxury-text-muted text-[10px] mt-0.5">Resumen de tu proyección</p>
                             </div>
 
-                            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-luxury pr-2">
-                                <div className="space-y-3">
-                                    {/* Puntos totales */}
+                            <div className="flex-1 min-h-0 flex flex-col gap-3">
+                                {/* Fila 1: Puntos Totales | Ganancia Minorista */}
+                                <div className="grid grid-cols-2 gap-3">
                                     <ResultCard
                                         title="Puntos Totales"
                                         value={formatNumber(calculations.totalPuntos) + " VV"}
                                         icon="✦"
                                         delay={0.1}
                                     />
-
-                                    {/* Ganancia Minorista */}
                                     <ResultCard
                                         title="Ganancia Minorista"
                                         value={formatCurrency(calculations.totalGananciaMinorista)}
-                                        subtitle="Diferencia precio público vs miembro"
+                                        subtitle="Precio público vs miembro"
                                         icon="◈"
                                         delay={0.2}
                                     />
+                                </div>
 
-                                    {/* Ganancia por Venta */}
+                                {/* Fila 2: Ganancia por Venta | Ganancia por Referir */}
+                                <div className="grid grid-cols-2 gap-3">
                                     <ResultCard
-                                        title={`Ganancia por Venta · ${calculations.porcentajeBono2}%`}
+                                        title={`Gan. por Venta · ${calculations.porcentajeBono2}%`}
                                         value={formatCurrency(calculations.gananciaVenta)}
-                                        subtitle="Según tu nivel de puntos"
+                                        subtitle="Según nivel de puntos"
                                         icon="◇"
                                         delay={0.3}
                                     />
-
-                                    {/* Ganancia por Referir */}
                                     <ResultCard
-                                        title={`Ganancia por Referir · ${calculations.porcentajeBono3}%`}
+                                        title={`Gan. por Referir · ${calculations.porcentajeBono3}%`}
                                         value={formatCurrency(calculations.gananciaReferir)}
                                         subtitle="Bonificación por compartir"
                                         icon="◆"
                                         delay={0.4}
                                     />
+                                </div>
 
-                                    <div className="divider-luxury my-4"></div>
-
-                                    {/* GRAN TOTAL */}
+                                {/* GRAN TOTAL */}
+                                <div
+                                    className="flex-1 rounded-2xl p-4 animate-fade-up relative overflow-hidden flex items-center justify-center"
+                                    style={{
+                                        animationDelay: '0.5s',
+                                        background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
+                                        border: '2px solid rgba(212, 175, 55, 0.5)',
+                                        boxShadow: '0 0 60px rgba(212, 175, 55, 0.15), 0 0 100px rgba(212, 175, 55, 0.1), 0 30px 60px rgba(0,0,0,0.5)'
+                                    }}
+                                >
+                                    {/* Efecto de brillo giratorio */}
                                     <div
-                                        className="rounded-2xl p-5 animate-fade-up relative overflow-hidden"
+                                        className="absolute inset-0 opacity-30"
                                         style={{
-                                            animationDelay: '0.5s',
-                                            background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
-                                            border: '2px solid rgba(212, 175, 55, 0.5)',
-                                            boxShadow: '0 0 60px rgba(212, 175, 55, 0.15), 0 0 100px rgba(212, 175, 55, 0.1), 0 30px 60px rgba(0,0,0,0.5)'
+                                            background: 'conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent 30%)',
+                                            animation: 'rotateGlow 10s linear infinite'
                                         }}
-                                    >
-                                        {/* Efecto de brillo giratorio */}
-                                        <div
-                                            className="absolute inset-0 opacity-30"
-                                            style={{
-                                                background: 'conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent 30%)',
-                                                animation: 'rotateGlow 10s linear infinite'
-                                            }}
-                                        ></div>
+                                    ></div>
 
-                                        <div className="relative z-10 text-center">
-                                            <div className="flex items-center justify-center gap-3 mb-2">
-                                                <div className="w-8 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
-                                                <p className="text-luxury-gold text-[11px] tracking-[0.3em] uppercase font-medium">Total Ganancias</p>
-                                                <div className="w-8 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
-                                            </div>
-                                            <p className="font-display text-4xl sm:text-5xl number-display gold-gradient-text py-1">
-                                                {formatCurrency(calculations.totalGanancias)}
-                                            </p>
-                                            <p className="text-luxury-text-muted text-[10px] mt-2 tracking-wider">
-                                                Suma de todas tus ganancias
-                                            </p>
-                                            <div className="flex items-center justify-center gap-2 mt-3">
-                                                <span className="text-luxury-gold text-lg">✦</span>
-                                                <span className="text-luxury-gold text-xl">★</span>
-                                                <span className="text-luxury-gold text-lg">✦</span>
-                                            </div>
+                                    <div className="relative z-10 text-center">
+                                        <div className="flex items-center justify-center gap-3 mb-2">
+                                            <div className="w-8 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                                            <p className="text-luxury-gold text-[11px] tracking-[0.3em] uppercase font-medium">Total Ganancias</p>
+                                            <div className="w-8 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                                        </div>
+                                        <p className="font-display text-4xl sm:text-5xl number-display gold-gradient-text py-1">
+                                            {formatCurrency(calculations.totalGanancias)}
+                                        </p>
+                                        <p className="text-luxury-text-muted text-[10px] mt-1 tracking-wider">
+                                            Suma de todas tus ganancias
+                                        </p>
+                                        <div className="flex items-center justify-center gap-2 mt-2">
+                                            <span className="text-luxury-gold text-lg">✦</span>
+                                            <span className="text-luxury-gold text-xl">★</span>
+                                            <span className="text-luxury-gold text-lg">✦</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {!hasProducts && (
-                                    <div className="mt-4 text-center">
-                                        <div className="inline-block p-4 rounded-2xl border border-dashed border-luxury-gold/20">
+                                    <div className="text-center">
+                                        <div className="inline-block p-3 rounded-2xl border border-dashed border-luxury-gold/20">
                                             <p className="text-luxury-text-muted text-sm font-light">
-                                                Selecciona productos para<br/>ver tus ganancias potenciales
+                                                Selecciona productos para ver tus ganancias
                                             </p>
                                         </div>
                                     </div>
