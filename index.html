@@ -42,10 +42,11 @@
             box-sizing: border-box;
         }
         
-        body {
+        html, body {
             background: #000000;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
         }
 
         /* Fondo con patrón sutil */
@@ -585,16 +586,16 @@
 
             return (
                 <div 
-                    className="card-premium rounded-2xl p-6 mb-5 animate-fade-up product-card overflow-visible relative"
+                    className="card-premium rounded-xl p-4 mb-3 animate-fade-up product-card overflow-visible relative"
                     style={{animationDelay: `${index * 0.1}s`, zIndex: 100 - index}}
                 >
                     {/* Header del producto */}
-                    <div className="flex items-center justify-between mb-5">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold-dark flex items-center justify-center text-black font-semibold text-sm">
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold-dark flex items-center justify-center text-black font-semibold text-xs">
                                 {index + 1}
                             </div>
-                            <span className="font-display text-xl text-luxury-gold-pale">Producto</span>
+                            <span className="font-display text-lg text-luxury-gold-pale">Producto</span>
                         </div>
                         {showRemove && (
                             <button 
@@ -606,7 +607,7 @@
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
                         {/* Selector de producto */}
                         <div className="lg:col-span-6 relative z-[100]" ref={dropdownRef}>
                             <label className="label-elegant block mb-2">
@@ -623,7 +624,7 @@
                                         setIsOpen(true);
                                     }}
                                     onFocus={() => setIsOpen(true)}
-                                    className="w-full input-premium rounded-xl px-5 py-4 text-luxury-text text-sm"
+                                    className="w-full input-premium rounded-xl px-4 py-3 text-luxury-text text-sm"
                                 />
                                 <div className="absolute right-4 top-1/2 -translate-y-1/2 text-luxury-gold opacity-50">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -672,7 +673,7 @@
                                 min="1"
                                 value={quantity}
                                 onChange={(e) => onQuantityChange(Math.max(1, parseInt(e.target.value) || 1))}
-                                className="w-full input-premium rounded-xl px-5 py-4 text-luxury-text text-center number-display text-lg font-light"
+                                className="w-full input-premium rounded-xl px-4 py-3 text-luxury-text text-center number-display text-base font-light"
                             />
                         </div>
 
@@ -683,7 +684,7 @@
                                     <label className="label-elegant block mb-2">
                                         Precio Público
                                     </label>
-                                    <div className="input-premium rounded-xl px-4 py-4 text-luxury-gold number-display text-sm font-light">
+                                    <div className="input-premium rounded-xl px-4 py-3 text-luxury-gold number-display text-sm font-light">
                                         {formatCurrency(product.precioPublicoSinImpuesto)}
                                     </div>
                                 </div>
@@ -691,7 +692,7 @@
                                     <label className="label-elegant block mb-2">
                                         Precio Miembro
                                     </label>
-                                    <div className="input-premium rounded-xl px-4 py-4 text-luxury-text-soft number-display text-sm font-light">
+                                    <div className="input-premium rounded-xl px-4 py-3 text-luxury-text-soft number-display text-sm font-light">
                                         {formatCurrency(product.precioMiembroSinImpuesto)}
                                     </div>
                                 </div>
@@ -701,7 +702,7 @@
 
                     {/* Puntos */}
                     {product && (
-                        <div className="mt-5 pt-5 border-t border-white/5 flex items-center gap-6">
+                        <div className="mt-3 pt-3 border-t border-white/5 flex items-center gap-6">
                             <div className="flex items-center gap-2">
                                 <span className="text-luxury-text-muted text-xs uppercase tracking-wider">Puntos/unidad</span>
                                 <span className="text-luxury-gold font-display text-lg">{product.vv}</span>
@@ -721,21 +722,21 @@
         // Componente de tarjeta de resultado
         const ResultCard = ({ title, value, subtitle, highlight = false, icon, delay = 0 }) => (
             <div 
-                className={`${highlight ? 'card-highlight pulse-gold' : 'card-premium'} rounded-2xl p-5 animate-fade-up`}
+                className={`${highlight ? 'card-highlight pulse-gold' : 'card-premium'} rounded-xl p-4 animate-fade-up`}
                 style={{animationDelay: `${delay}s`}}
             >
                 <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start justify-between mb-2">
                         <p className="label-elegant">{title}</p>
                         {icon && (
-                            <span className="text-xl icon-glow">{icon}</span>
+                            <span className="text-lg icon-glow">{icon}</span>
                         )}
                     </div>
-                    <p className={`font-display text-3xl number-display value-highlight ${highlight ? 'gold-gradient-text' : 'text-luxury-text'}`}>
+                    <p className={`font-display text-2xl number-display value-highlight ${highlight ? 'gold-gradient-text' : 'text-luxury-text'}`}>
                         {value}
                     </p>
                     {subtitle && (
-                        <p className="text-luxury-text-muted text-xs mt-2 font-light">{subtitle}</p>
+                        <p className="text-luxury-text-muted text-[10px] mt-1 font-light">{subtitle}</p>
                     )}
                 </div>
             </div>
@@ -743,9 +744,9 @@
 
         // Componente de escala
         const ScaleItem = ({ range, percentage, isActive }) => (
-            <div className={`flex justify-between py-2 transition-all duration-500 ${isActive ? 'scale-active pl-4' : 'text-luxury-text-muted'}`}>
-                <span className="text-sm font-light">{range}</span>
-                <span className="text-sm font-medium">{percentage}%</span>
+            <div className={`flex justify-between py-1 transition-all duration-500 ${isActive ? 'scale-active pl-4' : 'text-luxury-text-muted'}`}>
+                <span className="text-xs font-light">{range}</span>
+                <span className="text-xs font-medium">{percentage}%</span>
             </div>
         );
 
@@ -808,43 +809,37 @@
             const hasProducts = productLines.some(pl => pl.product !== null);
 
             return (
-                <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-7xl mx-auto">
-                        {/* Header */}
-                        <header className="text-center mb-16 animate-fade-up">
-                            <div className="mb-6">
-                                <div className="inline-block">
-                                    <div className="flex items-center justify-center gap-4 mb-4">
-                                        <div className="w-16 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
-                                        <span className="text-luxury-gold text-[10px] tracking-[0.4em] uppercase">Calculadora Empresarial</span>
-                                        <div className="w-16 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
-                                    </div>
+                <div className="h-screen flex flex-col px-4 sm:px-6 lg:px-8">
+                    {/* Header compacto */}
+                    <header className="text-center py-3 flex-shrink-0 animate-fade-up">
+                        <div className="flex items-center justify-center gap-4 mb-1">
+                            <div className="w-12 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                            <span className="text-luxury-gold text-[9px] tracking-[0.4em] uppercase">Calculadora Empresarial</span>
+                            <div className="w-12 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                        </div>
+                        <h1 className="font-display text-4xl sm:text-5xl font-light tracking-wide">
+                            <span className="gold-gradient-text">LEGACY</span>
+                        </h1>
+                    </header>
+
+                    {/* Contenido principal */}
+                    <div className="flex-1 min-h-0 grid grid-cols-1 xl:grid-cols-3 gap-5 max-w-7xl mx-auto w-full">
+                        {/* Panel de productos */}
+                        <div className="xl:col-span-2 flex flex-col min-h-0">
+                            <div className="flex items-center justify-between mb-3 flex-shrink-0">
+                                <div>
+                                    <h2 className="font-display text-xl text-luxury-text font-light">Mis Productos</h2>
+                                    <p className="text-luxury-text-muted text-[10px] mt-0.5">Agrega los productos que deseas calcular</p>
                                 </div>
+                                <button
+                                    onClick={addProductLine}
+                                    className="btn-luxury px-5 py-2 rounded-xl text-xs"
+                                >
+                                    + Agregar
+                                </button>
                             </div>
-                            <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl font-light tracking-wide mb-4">
-                                <span className="gold-gradient-text">LEGACY</span>
-                            </h1>
-                            <p className="text-luxury-text-muted text-sm tracking-[0.3em] uppercase font-light">
-                                Proyecta tus ganancias
-                            </p>
-                        </header>
 
-                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
-                            {/* Panel de productos */}
-                            <div className="xl:col-span-2">
-                                <div className="flex items-center justify-between mb-8">
-                                    <div>
-                                        <h2 className="font-display text-2xl text-luxury-text font-light">Mis Productos</h2>
-                                        <p className="text-luxury-text-muted text-xs mt-1">Agrega los productos que deseas calcular</p>
-                                    </div>
-                                    <button 
-                                        onClick={addProductLine}
-                                        className="btn-luxury px-6 py-3 rounded-xl text-xs"
-                                    >
-                                        + Agregar
-                                    </button>
-                                </div>
-
+                            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-luxury pr-2">
                                 {productLines.map((line, index) => (
                                     <ProductLine
                                         key={index}
@@ -859,25 +854,25 @@
                                 ))}
 
                                 {/* Escalas de bonos */}
-                                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-[1]">
-                                    <div className="card-premium rounded-2xl p-6 animate-fade-up" style={{animationDelay: '0.3s'}}>
-                                        <div className="flex items-center gap-3 mb-5">
+                                <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative z-[1]">
+                                    <div className="card-premium rounded-2xl p-4 animate-fade-up" style={{animationDelay: '0.3s'}}>
+                                        <div className="flex items-center gap-3 mb-3">
                                             <div className="w-2 h-2 rounded-full bg-luxury-gold"></div>
-                                            <h3 className="text-luxury-gold font-display text-lg font-light">Escala Ganancia por Venta</h3>
+                                            <h3 className="text-luxury-gold font-display text-base font-light">Escala Ganancia por Venta</h3>
                                         </div>
-                                        <div className="space-y-1">
+                                        <div className="space-y-0">
                                             <ScaleItem range="0 — 499 puntos" percentage={4} isActive={calculations.porcentajeBono2 === 4} />
                                             <ScaleItem range="500 — 2,499 puntos" percentage={8} isActive={calculations.porcentajeBono2 === 8} />
                                             <ScaleItem range="2,500 — 9,999 puntos" percentage={12} isActive={calculations.porcentajeBono2 === 12} />
                                             <ScaleItem range="10,000+ puntos" percentage={20} isActive={calculations.porcentajeBono2 === 20} />
                                         </div>
                                     </div>
-                                    <div className="card-premium rounded-2xl p-6 animate-fade-up" style={{animationDelay: '0.4s'}}>
-                                        <div className="flex items-center gap-3 mb-5">
+                                    <div className="card-premium rounded-2xl p-4 animate-fade-up" style={{animationDelay: '0.4s'}}>
+                                        <div className="flex items-center gap-3 mb-3">
                                             <div className="w-2 h-2 rounded-full bg-luxury-gold"></div>
-                                            <h3 className="text-luxury-gold font-display text-lg font-light">Escala Ganancia por Referir</h3>
+                                            <h3 className="text-luxury-gold font-display text-base font-light">Escala Ganancia por Referir</h3>
                                         </div>
-                                        <div className="space-y-1">
+                                        <div className="space-y-0">
                                             <ScaleItem range="0 — 249 puntos" percentage={0} isActive={calculations.porcentajeBono3 === 0} />
                                             <ScaleItem range="250 — 499 puntos" percentage={4} isActive={calculations.porcentajeBono3 === 4} />
                                             <ScaleItem range="500 — 2,499 puntos" percentage={12} isActive={calculations.porcentajeBono3 === 12} />
@@ -887,119 +882,113 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Panel de resultados */}
-                            <div className="xl:col-span-1">
-                                <div className="sticky top-8">
-                                    <div className="mb-8">
-                                        <h2 className="font-display text-2xl text-luxury-text font-light">Mis Ganancias</h2>
-                                        <p className="text-luxury-text-muted text-xs mt-1">Resumen de tu proyección</p>
-                                    </div>
-                                    
-                                    <div className="space-y-4">
-                                        {/* Puntos totales */}
-                                        <ResultCard
-                                            title="Puntos Totales"
-                                            value={formatNumber(calculations.totalPuntos) + " VV"}
-                                            icon="✦"
-                                            delay={0.1}
-                                        />
-
-                                        <div className="my-5"></div>
-
-                                        {/* Ganancia Minorista */}
-                                        <ResultCard
-                                            title="Ganancia Minorista"
-                                            value={formatCurrency(calculations.totalGananciaMinorista)}
-                                            subtitle="Diferencia precio público vs miembro"
-                                            icon="◈"
-                                            delay={0.2}
-                                        />
-
-                                        {/* Ganancia por Venta */}
-                                        <ResultCard
-                                            title={`Ganancia por Venta · ${calculations.porcentajeBono2}%`}
-                                            value={formatCurrency(calculations.gananciaVenta)}
-                                            subtitle="Según tu nivel de puntos"
-                                            icon="◇"
-                                            delay={0.3}
-                                        />
-
-                                        {/* Ganancia por Referir */}
-                                        <ResultCard
-                                            title={`Ganancia por Referir · ${calculations.porcentajeBono3}%`}
-                                            value={formatCurrency(calculations.gananciaReferir)}
-                                            subtitle="Bonificación por compartir"
-                                            icon="◆"
-                                            delay={0.4}
-                                        />
-
-                                        <div className="divider-luxury my-8"></div>
-
-                                        {/* GRAN TOTAL */}
-                                        <div 
-                                            className="rounded-3xl p-8 animate-fade-up relative overflow-hidden"
-                                            style={{
-                                                animationDelay: '0.5s',
-                                                background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
-                                                border: '2px solid rgba(212, 175, 55, 0.5)',
-                                                boxShadow: '0 0 60px rgba(212, 175, 55, 0.15), 0 0 100px rgba(212, 175, 55, 0.1), 0 30px 60px rgba(0,0,0,0.5)'
-                                            }}
-                                        >
-                                            {/* Efecto de brillo giratorio */}
-                                            <div 
-                                                className="absolute inset-0 opacity-30"
-                                                style={{
-                                                    background: 'conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent 30%)',
-                                                    animation: 'rotateGlow 10s linear infinite'
-                                                }}
-                                            ></div>
-                                            
-                                            <div className="relative z-10 text-center">
-                                                <div className="flex items-center justify-center gap-3 mb-4">
-                                                    <div className="w-8 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
-                                                    <p className="text-luxury-gold text-[11px] tracking-[0.3em] uppercase font-medium">Total Ganancias</p>
-                                                    <div className="w-8 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
-                                                </div>
-                                                <p className="font-display text-5xl sm:text-6xl lg:text-7xl number-display gold-gradient-text py-2">
-                                                    {formatCurrency(calculations.totalGanancias)}
-                                                </p>
-                                                <p className="text-luxury-text-muted text-xs mt-3 tracking-wider">
-                                                    Suma de todas tus ganancias
-                                                </p>
-                                                <div className="flex items-center justify-center gap-2 mt-5">
-                                                    <span className="text-luxury-gold text-xl">✦</span>
-                                                    <span className="text-luxury-gold text-2xl">★</span>
-                                                    <span className="text-luxury-gold text-xl">✦</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {!hasProducts && (
-                                        <div className="mt-8 text-center">
-                                            <div className="inline-block p-6 rounded-2xl border border-dashed border-luxury-gold/20">
-                                                <p className="text-luxury-text-muted text-sm font-light">
-                                                    Selecciona productos para<br/>ver tus ganancias potenciales
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
                         </div>
 
-                        {/* Footer */}
-                        <footer className="mt-20 text-center animate-fade-up" style={{animationDelay: '0.6s'}}>
-                            <div className="divider-luxury w-64 mx-auto mb-8"></div>
-                            <p className="text-luxury-text-muted text-xs tracking-[0.2em] uppercase">
-                                Lista de precios Colombia · Abril 2025
-                            </p>
-                            <p className="text-luxury-text-muted/50 text-[10px] mt-3 tracking-wider">
-                                Los cálculos son estimados y pueden variar según condiciones del programa
-                            </p>
-                        </footer>
+                        {/* Panel de resultados */}
+                        <div className="xl:col-span-1 flex flex-col min-h-0">
+                            <div className="mb-3 flex-shrink-0">
+                                <h2 className="font-display text-xl text-luxury-text font-light">Mis Ganancias</h2>
+                                <p className="text-luxury-text-muted text-[10px] mt-0.5">Resumen de tu proyección</p>
+                            </div>
+
+                            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-luxury pr-2">
+                                <div className="space-y-3">
+                                    {/* Puntos totales */}
+                                    <ResultCard
+                                        title="Puntos Totales"
+                                        value={formatNumber(calculations.totalPuntos) + " VV"}
+                                        icon="✦"
+                                        delay={0.1}
+                                    />
+
+                                    {/* Ganancia Minorista */}
+                                    <ResultCard
+                                        title="Ganancia Minorista"
+                                        value={formatCurrency(calculations.totalGananciaMinorista)}
+                                        subtitle="Diferencia precio público vs miembro"
+                                        icon="◈"
+                                        delay={0.2}
+                                    />
+
+                                    {/* Ganancia por Venta */}
+                                    <ResultCard
+                                        title={`Ganancia por Venta · ${calculations.porcentajeBono2}%`}
+                                        value={formatCurrency(calculations.gananciaVenta)}
+                                        subtitle="Según tu nivel de puntos"
+                                        icon="◇"
+                                        delay={0.3}
+                                    />
+
+                                    {/* Ganancia por Referir */}
+                                    <ResultCard
+                                        title={`Ganancia por Referir · ${calculations.porcentajeBono3}%`}
+                                        value={formatCurrency(calculations.gananciaReferir)}
+                                        subtitle="Bonificación por compartir"
+                                        icon="◆"
+                                        delay={0.4}
+                                    />
+
+                                    <div className="divider-luxury my-4"></div>
+
+                                    {/* GRAN TOTAL */}
+                                    <div
+                                        className="rounded-2xl p-5 animate-fade-up relative overflow-hidden"
+                                        style={{
+                                            animationDelay: '0.5s',
+                                            background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
+                                            border: '2px solid rgba(212, 175, 55, 0.5)',
+                                            boxShadow: '0 0 60px rgba(212, 175, 55, 0.15), 0 0 100px rgba(212, 175, 55, 0.1), 0 30px 60px rgba(0,0,0,0.5)'
+                                        }}
+                                    >
+                                        {/* Efecto de brillo giratorio */}
+                                        <div
+                                            className="absolute inset-0 opacity-30"
+                                            style={{
+                                                background: 'conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent 30%)',
+                                                animation: 'rotateGlow 10s linear infinite'
+                                            }}
+                                        ></div>
+
+                                        <div className="relative z-10 text-center">
+                                            <div className="flex items-center justify-center gap-3 mb-2">
+                                                <div className="w-8 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                                                <p className="text-luxury-gold text-[11px] tracking-[0.3em] uppercase font-medium">Total Ganancias</p>
+                                                <div className="w-8 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                                            </div>
+                                            <p className="font-display text-4xl sm:text-5xl number-display gold-gradient-text py-1">
+                                                {formatCurrency(calculations.totalGanancias)}
+                                            </p>
+                                            <p className="text-luxury-text-muted text-[10px] mt-2 tracking-wider">
+                                                Suma de todas tus ganancias
+                                            </p>
+                                            <div className="flex items-center justify-center gap-2 mt-3">
+                                                <span className="text-luxury-gold text-lg">✦</span>
+                                                <span className="text-luxury-gold text-xl">★</span>
+                                                <span className="text-luxury-gold text-lg">✦</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {!hasProducts && (
+                                    <div className="mt-4 text-center">
+                                        <div className="inline-block p-4 rounded-2xl border border-dashed border-luxury-gold/20">
+                                            <p className="text-luxury-text-muted text-sm font-light">
+                                                Selecciona productos para<br/>ver tus ganancias potenciales
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
+
+                    {/* Footer compacto */}
+                    <footer className="flex-shrink-0 text-center py-2">
+                        <p className="text-luxury-text-muted/50 text-[9px] tracking-[0.15em] uppercase">
+                            Lista de precios Colombia · Abril 2025 · Los cálculos son estimados
+                        </p>
+                    </footer>
                 </div>
             );
         };
