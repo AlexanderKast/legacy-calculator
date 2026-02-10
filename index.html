@@ -672,7 +672,18 @@
                                 type="number"
                                 min="1"
                                 value={quantity}
-                                onChange={(e) => onQuantityChange(Math.max(1, parseInt(e.target.value) || 1))}
+                                placeholder="1"
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    if (val === '') {
+                                        onQuantityChange('');
+                                    } else {
+                                        const num = parseInt(val);
+                                        if (!isNaN(num) && num > 0) {
+                                            onQuantityChange(num);
+                                        }
+                                    }
+                                }}
                                 className="w-full input-premium rounded-xl px-4 py-3 text-luxury-text text-center number-display text-base font-light"
                             />
                         </div>
@@ -752,10 +763,10 @@
 
         // Componente principal
         const LegacyCalculator = () => {
-            const [productLines, setProductLines] = useState([{ product: null, quantity: 1 }]);
+            const [productLines, setProductLines] = useState([{ product: null, quantity: '' }]);
 
             const addProductLine = () => {
-                setProductLines([...productLines, { product: null, quantity: 1 }]);
+                setProductLines([...productLines, { product: null, quantity: '' }]);
             };
 
             const removeProductLine = (index) => {
@@ -777,8 +788,9 @@
 
                 productLines.forEach(({ product, quantity }) => {
                     if (product) {
-                        totalPuntos += product.vv * quantity;
-                        totalGananciaMinorista += product.bonoMinoristaSinImpuesto * quantity;
+                        const qty = Number(quantity) || 0;
+                        totalPuntos += product.vv * qty;
+                        totalGananciaMinorista += product.bonoMinoristaSinImpuesto * qty;
                     }
                 });
 
@@ -788,7 +800,8 @@
                 let baseGananciaVenta = 0;
                 productLines.forEach(({ product, quantity }) => {
                     if (product) {
-                        baseGananciaVenta += product.precioMiembroSinImpuesto * quantity;
+                        const qty = Number(quantity) || 0;
+                        baseGananciaVenta += product.precioMiembroSinImpuesto * qty;
                     }
                 });
                 const gananciaVenta = baseGananciaVenta * (porcentajeBono2 / 100);
@@ -929,7 +942,7 @@
 
                                 {/* GRAN TOTAL */}
                                 <div
-                                    className="flex-1 rounded-2xl p-4 animate-fade-up relative overflow-hidden flex items-center justify-center"
+                                    className="flex-1 rounded-2xl py-8 px-4 sm:p-4 animate-fade-up relative overflow-hidden flex items-center justify-center min-h-[180px] sm:min-h-0"
                                     style={{
                                         animationDelay: '0.5s',
                                         background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
