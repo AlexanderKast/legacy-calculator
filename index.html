@@ -44,9 +44,15 @@
         
         html, body {
             background: #000000;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
             margin: 0;
+        }
+
+        @media (min-width: 1280px) {
+            html, body {
+                height: 100vh;
+                overflow: hidden;
+            }
         }
 
         /* Fondo con patrón sutil */
@@ -809,23 +815,26 @@
             const hasProducts = productLines.some(pl => pl.product !== null);
 
             return (
-                <div className="h-screen flex flex-col px-4 sm:px-6 lg:px-8">
+                <div className="min-h-screen xl:h-screen flex flex-col px-4 sm:px-6 lg:px-8">
                     {/* Header compacto */}
-                    <header className="text-center py-3 flex-shrink-0 animate-fade-up">
-                        <div className="flex items-center justify-center gap-4 mb-1">
-                            <div className="w-12 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
-                            <span className="text-luxury-gold text-[9px] tracking-[0.4em] uppercase">Calculadora Empresarial</span>
-                            <div className="w-12 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
+                    <header className="text-center py-6 xl:py-3 flex-shrink-0 animate-fade-up">
+                        <div className="flex items-center justify-center gap-4 mb-2 xl:mb-1">
+                            <div className="w-16 xl:w-12 h-px bg-gradient-to-r from-transparent to-luxury-gold"></div>
+                            <span className="text-luxury-gold text-[10px] xl:text-[9px] tracking-[0.4em] uppercase">Calculadora Empresarial</span>
+                            <div className="w-16 xl:w-12 h-px bg-gradient-to-l from-transparent to-luxury-gold"></div>
                         </div>
-                        <h1 className="font-display text-4xl sm:text-5xl font-light tracking-wide">
+                        <h1 className="font-display text-5xl sm:text-6xl xl:text-5xl font-light tracking-wide">
                             <span className="gold-gradient-text">LEGACY</span>
                         </h1>
+                        <p className="text-luxury-text-muted text-sm tracking-[0.3em] uppercase font-light mt-2 xl:hidden">
+                            Proyecta tus ganancias
+                        </p>
                     </header>
 
                     {/* Contenido principal */}
                     <div className="flex-1 min-h-0 grid grid-cols-1 xl:grid-cols-3 gap-5 max-w-7xl mx-auto w-full">
                         {/* Panel de productos */}
-                        <div className="xl:col-span-2 flex flex-col min-h-0">
+                        <div className="xl:col-span-2 flex flex-col xl:min-h-0">
                             <div className="flex items-center justify-between mb-3 flex-shrink-0">
                                 <div>
                                     <h2 className="font-display text-xl text-luxury-text font-light">Mis Productos</h2>
@@ -839,7 +848,7 @@
                                 </button>
                             </div>
 
-                            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-luxury pr-2">
+                            <div className="xl:flex-1 xl:min-h-0 xl:overflow-y-auto scrollbar-luxury xl:pr-2">
                                 {productLines.map((line, index) => (
                                     <ProductLine
                                         key={index}
@@ -885,15 +894,15 @@
                         </div>
 
                         {/* Panel de resultados */}
-                        <div className="xl:col-span-1 flex flex-col min-h-0">
+                        <div className="xl:col-span-1 flex flex-col xl:min-h-0">
                             <div className="mb-3 flex-shrink-0">
                                 <h2 className="font-display text-xl text-luxury-text font-light">Mis Ganancias</h2>
                                 <p className="text-luxury-text-muted text-[10px] mt-0.5">Resumen de tu proyección</p>
                             </div>
 
-                            <div className="flex-1 min-h-0 flex flex-col gap-3">
+                            <div className="xl:flex-1 xl:min-h-0 flex flex-col gap-3">
                                 {/* Fila 1: Puntos Totales | Ganancia Minorista */}
-                                <div className="grid grid-cols-2 gap-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <ResultCard
                                         title="Puntos Totales"
                                         value={formatNumber(calculations.totalPuntos) + " VV"}
@@ -910,7 +919,7 @@
                                 </div>
 
                                 {/* Fila 2: Ganancia por Venta | Ganancia por Referir */}
-                                <div className="grid grid-cols-2 gap-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <ResultCard
                                         title={`Gan. por Venta · ${calculations.porcentajeBono2}%`}
                                         value={formatCurrency(calculations.gananciaVenta)}
@@ -929,7 +938,7 @@
 
                                 {/* GRAN TOTAL */}
                                 <div
-                                    className="flex-1 rounded-2xl p-4 animate-fade-up relative overflow-hidden flex items-center justify-center"
+                                    className="xl:flex-1 rounded-2xl p-6 xl:p-4 animate-fade-up relative overflow-hidden flex items-center justify-center"
                                     style={{
                                         animationDelay: '0.5s',
                                         background: 'linear-gradient(145deg, rgba(30, 25, 12, 0.98) 0%, rgba(20, 16, 8, 0.99) 100%)',
@@ -980,9 +989,12 @@
                     </div>
 
                     {/* Footer compacto */}
-                    <footer className="flex-shrink-0 text-center py-2">
-                        <p className="text-luxury-text-muted/50 text-[9px] tracking-[0.15em] uppercase">
-                            Lista de precios Colombia · Abril 2025 · Los cálculos son estimados
+                    <footer className="flex-shrink-0 text-center py-6 xl:py-2">
+                        <p className="text-luxury-text-muted/50 text-[10px] xl:text-[9px] tracking-[0.15em] uppercase">
+                            Lista de precios Colombia · Abril 2025
+                        </p>
+                        <p className="text-luxury-text-muted/30 text-[9px] mt-1 tracking-wider">
+                            Los cálculos son estimados y pueden variar
                         </p>
                     </footer>
                 </div>
