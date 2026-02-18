@@ -678,7 +678,11 @@
                                 type="number"
                                 min="1"
                                 value={quantity}
-                                onChange={(e) => onQuantityChange(Math.max(1, parseInt(e.target.value) || 1))}
+                                placeholder=""
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    onQuantityChange(val === '' ? '' : Math.max(1, parseInt(val) || 1));
+                                }}
                                 className="w-full input-premium rounded-xl px-4 py-3 text-luxury-text text-center number-display text-base font-light"
                             />
                         </div>
@@ -716,7 +720,7 @@
                             <div className="w-px h-4 bg-luxury-gold/20"></div>
                             <div className="flex items-center gap-2">
                                 <span className="text-luxury-text-muted text-xs uppercase tracking-wider">Total puntos</span>
-                                <span className="text-luxury-gold font-display text-lg">{formatNumber(product.vv * quantity)}</span>
+                                <span className="text-luxury-gold font-display text-lg">{formatNumber(product.vv * (parseInt(quantity) || 0))}</span>
                                 <span className="text-luxury-gold-dark text-xs">VV</span>
                             </div>
                         </div>
@@ -758,10 +762,10 @@
 
         // Componente principal
         const LegacyCalculator = () => {
-            const [productLines, setProductLines] = useState([{ product: null, quantity: 1 }]);
+            const [productLines, setProductLines] = useState([{ product: null, quantity: '' }]);
 
             const addProductLine = () => {
-                setProductLines([...productLines, { product: null, quantity: 1 }]);
+                setProductLines([...productLines, { product: null, quantity: '' }]);
             };
 
             const removeProductLine = (index) => {
@@ -783,8 +787,9 @@
 
                 productLines.forEach(({ product, quantity }) => {
                     if (product) {
-                        totalPuntos += product.vv * quantity;
-                        totalGananciaMinorista += product.bonoMinoristaSinImpuesto * quantity;
+                        const qty = parseInt(quantity) || 0;
+                        totalPuntos += product.vv * qty;
+                        totalGananciaMinorista += product.bonoMinoristaSinImpuesto * qty;
                     }
                 });
 
@@ -794,7 +799,8 @@
                 let baseGananciaVenta = 0;
                 productLines.forEach(({ product, quantity }) => {
                     if (product) {
-                        baseGananciaVenta += product.precioMiembroSinImpuesto * quantity;
+                        const qty = parseInt(quantity) || 0;
+                        baseGananciaVenta += product.precioMiembroSinImpuesto * qty;
                     }
                 });
                 const gananciaVenta = baseGananciaVenta * (porcentajeBono2 / 100);
